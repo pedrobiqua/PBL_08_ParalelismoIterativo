@@ -4,9 +4,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 /**
- * ProcessadorDeArquivos
+ * Processador de Arquivos
  */
 public class ProcessadorDeArquivos {
     
@@ -51,7 +52,7 @@ public class ProcessadorDeArquivos {
      * @return Matriz de acordo com as colunas e linhas do arquivo.
      * @throws IOException Exceção de entrada e saída.
      */
-    public static Double[][] criaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
+    private static Double[][] criaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
 
         try {
             File arquivo = new File(nomeArquivo);
@@ -89,7 +90,10 @@ public class ProcessadorDeArquivos {
 
         for (int i = 0; i < tamanhoLinha; i++) {
             for (int j = 0; j < tamanhoColuna; j++) {
-                matriz[i][j] = Math.random();
+                // Gera um numero aleatorio entre 0 e 10 e formata para duas casas decimais.
+                DecimalFormat df = new DecimalFormat("0,00"); 
+                String numeroAleatorio = df.format(Math.random() * 1000);
+                matriz[i][j] = Double.parseDouble(numeroAleatorio.replace(",", "."));
             }
         }
 
@@ -103,7 +107,7 @@ public class ProcessadorDeArquivos {
      * @param matriz  Matriz a ser salva.
      * @param nomeArquivo Nome do arquivo.
      */
-    public static void SalvaMatriz(Double[][] matriz, String nomeArquivo) {
+    private static void SalvaMatriz(Double[][] matriz, String nomeArquivo) {
 
         try {
             FileWriter fileWriter = new FileWriter(nomeArquivo);
