@@ -17,7 +17,7 @@ public class ProcessadorDeArquivos {
      * @return Matriz criada apartir do arquivo.
      * @throws IOException Caso o arquivo nao exista.
      */
-    public static Double[][] inicializaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
+    public static double[][] inicializaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
 
         // Está apenas lendo o arquivo e imprimindo na tela.
         File arquivo = new File(nomeArquivo);
@@ -26,7 +26,7 @@ public class ProcessadorDeArquivos {
         String linha = bufferedReader.readLine();
 
         // Cria uma matriz de acordo com as colunas e linhas do arquivo.
-        Double[][] matriz = criaMatrizApartirDoArquivo(nomeArquivo);
+        double[][] matriz = criaMatrizApartirDoArquivo(nomeArquivo);
         int i = 0;
 
         // Percorre o arquivo linha a linha
@@ -52,7 +52,7 @@ public class ProcessadorDeArquivos {
      * @return Matriz de acordo com as colunas e linhas do arquivo.
      * @throws IOException Exceção de entrada e saída.
      */
-    private static Double[][] criaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
+    private static double[][] criaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
 
         try {
             File arquivo = new File(nomeArquivo);
@@ -70,7 +70,7 @@ public class ProcessadorDeArquivos {
                 linha = bufferedReader.readLine();
             }
             bufferedReader.close();
-            return new Double[quantidadeDeLinha][tamanhoColuna];
+            return new double[quantidadeDeLinha][tamanhoColuna];
 
         } catch (Exception e) {
             e.printStackTrace();
