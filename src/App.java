@@ -7,8 +7,8 @@ public class App {
     /**
      * @param args the command line arguments
      */
-    public static long execute_MutiplicacaoMatriz_Sequencial(long threadInicial, long threadFinal, long totalDeVetoresMatrizC, double[][] matrizA, double[][] matrizB) {
-        MutiplicacaoMatriz mutiplicacaoMatriz = new MutiplicacaoMatriz(threadInicial, threadFinal, totalDeVetoresMatrizC, matrizA, matrizB);
+    public static long execute_MutiplicacaoMatriz_Sequencial(long threadInicial, double[][] matrizA, double[][] matrizB) {
+        MutiplicacaoMatriz mutiplicacaoMatriz = new MutiplicacaoMatriz(threadInicial, matrizA, matrizB);
 		long Tempo_inicio = System.currentTimeMillis();
 		double[][] matrizC = mutiplicacaoMatriz.execute();
         ProcessadorDeArquivos.SalvaMatriz(matrizC, "MatrizC.txt");
@@ -31,7 +31,7 @@ public class App {
 		GerenciadorDeMutiplicacoes[] tarefa = new GerenciadorDeMutiplicacoes[numeroDeTarefas];
         long threadInicial = 0;
 		for (int i = 0; i < numeroDeTarefas; i++) {
-            tarefa[i] = new GerenciadorDeMutiplicacoes(i, threadInicial, tamSequenciaPorTarefa, totalDeVetoresMatrizC, conclusao, matrizA, matrizB);
+            tarefa[i] = new GerenciadorDeMutiplicacoes(i, threadInicial, conclusao, matrizA, matrizB);
             threadInicial = tamSequenciaPorTarefa;
             tamSequenciaPorTarefa += totalVetores;
         }
@@ -75,7 +75,7 @@ public class App {
 
             long totalDeVetoresMatrizC = (matrizA.length) * (matrizB[0].length);
             MatrizResultante = new double[matrizA.length][matrizB[0].length];
-            long tempoSequencial = execute_MutiplicacaoMatriz_Sequencial(0, matrizB[0].length, totalDeVetoresMatrizC, matrizA, matrizB);
+            long tempoSequencial = execute_MutiplicacaoMatriz_Sequencial(0, matrizA, matrizB);
 
             MatrizResultante = new double[matrizA.length][matrizB[0].length];
             long tempoParalelo = execute_MutiplicacaoMatriz_Paralela(totalDeVetoresMatrizC, numTarefas, matrizA, matrizB);

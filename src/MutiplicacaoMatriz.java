@@ -1,16 +1,12 @@
 public class MutiplicacaoMatriz {
 
     private long threadInicial;
-    private long threadFinal;
-    private long totalDeVetoresMatrizC;
     private double[][] matrizA;
     private double[][] matrizB;
     private double[][] matrizC;
 
-    public MutiplicacaoMatriz(long threadInicial, long threadFinal, long totalDeVetoresMatrizC, double[][] matrizA, double[][] matrizB) {
+    public MutiplicacaoMatriz(long threadInicial, double[][] matrizA, double[][] matrizB) {
         this.threadInicial = threadInicial;
-        this.threadFinal = threadFinal;
-        this.totalDeVetoresMatrizC = totalDeVetoresMatrizC;
         this.matrizA = matrizA;
         this.matrizB = matrizB;
         this.matrizC = new double[matrizA.length][matrizB[0].length];

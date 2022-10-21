@@ -4,18 +4,14 @@ public class GerenciadorDeMutiplicacoes extends Thread {
     
     private int id;
     private long threadInicial;
-    private long threadFinal;
-    private long totalDeVetoresMatrizC;
     private double[][] matrizA;
     private double[][] matrizB;
     private Semaphore conclusao;
 
-    public GerenciadorDeMutiplicacoes(int id, long threadInicial, long threadFinal, long totalDeVetoresMatrizC, Semaphore conclusao, double[][] matrizA, double[][] matrizB) {
+    public GerenciadorDeMutiplicacoes(int id, long threadInicial, Semaphore conclusao, double[][] matrizA, double[][] matrizB) {
         this.id = id;
         this.threadInicial = threadInicial;
-        this.threadFinal = threadFinal;
         this.conclusao = conclusao;
-        this.totalDeVetoresMatrizC = totalDeVetoresMatrizC;
         this.matrizA = matrizA;
         this.matrizB = matrizB;
     }
@@ -24,7 +20,7 @@ public class GerenciadorDeMutiplicacoes extends Thread {
         try {
 
             System.out.println("Thread [" + id + "] iniciada");
-            MutiplicacaoMatriz multiplicacao = new MutiplicacaoMatriz(threadInicial, threadFinal, totalDeVetoresMatrizC, matrizA, matrizB);
+            MutiplicacaoMatriz multiplicacao = new MutiplicacaoMatriz(threadInicial, matrizA, matrizB);
             double[][] matrizC = multiplicacao.execute();
             SalvaMatriz(matrizC);
             System.out.println("Thread [" + id + "] finalizada");
