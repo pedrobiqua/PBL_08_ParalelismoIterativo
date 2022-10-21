@@ -86,7 +86,7 @@ public class ProcessadorDeArquivos {
      */
     public static void criaAqruivoMatriz(int tamanhoLinha, int tamanhoColuna, String nomeArquivo) {
 
-        Double[][] matriz = new Double[tamanhoLinha][tamanhoColuna];
+        double[][] matriz = new double[tamanhoLinha][tamanhoColuna];
 
         for (int i = 0; i < tamanhoLinha; i++) {
             for (int j = 0; j < tamanhoColuna; j++) {
@@ -107,7 +107,7 @@ public class ProcessadorDeArquivos {
      * @param matriz  Matriz a ser salva.
      * @param nomeArquivo Nome do arquivo.
      */
-    private static void SalvaMatriz(Double[][] matriz, String nomeArquivo) {
+    public static void SalvaMatriz(double[][] matriz, String nomeArquivo) {
 
         try {
             FileWriter fileWriter = new FileWriter(nomeArquivo);

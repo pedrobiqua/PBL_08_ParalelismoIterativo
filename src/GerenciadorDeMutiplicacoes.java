@@ -26,12 +26,22 @@ public class GerenciadorDeMutiplicacoes extends Thread {
             System.out.println("Thread [" + id + "] iniciada");
             MutiplicacaoMatriz multiplicacao = new MutiplicacaoMatriz(threadInicial, threadFinal, totalDeVetoresMatrizC, matrizA, matrizB);
             double[][] matrizC = multiplicacao.execute();
-            ProcessadorDeArquivos.criaAqruivoMatriz(matrizC.length, matrizC[0].length, "MatrizC.txt");
+            SalvaMatriz(matrizC);
             System.out.println("Thread [" + id + "] finalizada");
             conclusao.release();
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void SalvaMatriz(double[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if (matriz[i][j] != 0) {
+                    App.MatrizResultante[i][j] = matriz[i][j];
+                }
+            }
         }
     }
 }

@@ -2,6 +2,8 @@ import java.util.concurrent.Semaphore;
 
 public class App {
 
+    public static double[][] MatrizResultante;
+
     /**
      * @param args the command line arguments
      */
@@ -9,7 +11,7 @@ public class App {
         MutiplicacaoMatriz mutiplicacaoMatriz = new MutiplicacaoMatriz(threadInicial, threadFinal, totalDeVetoresMatrizC, matrizA, matrizB);
 		long Tempo_inicio = System.currentTimeMillis();
 		double[][] matrizC = mutiplicacaoMatriz.execute();
-        ProcessadorDeArquivos.criaAqruivoMatriz(matrizC.length, matrizC[0].length, "MatrizC.txt");
+        ProcessadorDeArquivos.SalvaMatriz(matrizC, "MatrizC.txt");
 		long Tempo_fim = System.currentTimeMillis();
 		long Tempo_execucao = Tempo_fim - Tempo_inicio;
 		return Tempo_execucao;
@@ -41,6 +43,7 @@ public class App {
 			//exec.execute(tarefa[i]);
 			tarefa[i].start();
 		conclusao.acquire();
+        ProcessadorDeArquivos.SalvaMatriz(MatrizResultante, "matrizC.txt");
 		long Tempo_fim = System.currentTimeMillis();
 		//exec.shutdown();
 		long Tempo_execucao = Tempo_fim - Tempo_inicio;
@@ -64,15 +67,17 @@ public class App {
 		System.out.println("N" + SEP + "Tamanho da Sequência" + SEP + "Tempo Sequencial" + SEP + "Tempo Paralelo" + SEP + "Razão entre os Tempos");
 
         for (int n = 0; n <= 1; n++) {
-            ProcessadorDeArquivos.criaAqruivoMatriz(3, 3, "MatrizA.txt");
-            ProcessadorDeArquivos.criaAqruivoMatriz(3, 3, "MatrizB.txt");
+            ProcessadorDeArquivos.criaAqruivoMatriz(1000, 1000, "MatrizA.txt");
+            ProcessadorDeArquivos.criaAqruivoMatriz(1000, 1000, "MatrizB.txt");
 
             double[][] matrizA = ProcessadorDeArquivos.inicializaMatrizApartirDoArquivo("MatrizA.txt");
             double[][] matrizB = ProcessadorDeArquivos.inicializaMatrizApartirDoArquivo("MatrizB.txt");
 
             long totalDeVetoresMatrizC = (matrizA.length) * (matrizB[0].length);
-
+            MatrizResultante = new double[matrizA.length][matrizB[0].length];
             long tempoSequencial = execute_MutiplicacaoMatriz_Sequencial(0, matrizB[0].length, totalDeVetoresMatrizC, matrizA, matrizB);
+
+            MatrizResultante = new double[matrizA.length][matrizB[0].length];
             long tempoParalelo = execute_MutiplicacaoMatriz_Paralela(totalDeVetoresMatrizC, numTarefas, matrizA, matrizB);
             double razao = (double) tempoSequencial / tempoParalelo;
 

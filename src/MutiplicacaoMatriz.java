@@ -19,23 +19,18 @@ public class MutiplicacaoMatriz {
     public double[][] execute() {
 
         try {
-            // Inicializa a matriz C com zeros
-            for (int i = (int)threadInicial; i < threadFinal; i++) {
+            // Linha
+            for (int i = ( (int)threadInicial/matrizC.length ); i < matrizC.length; i++) {
+                // Coluna
+                for (int j = ((int)threadInicial % matrizC[0].length ); j < matrizC[0].length; j++) {
 
-                for (int j = (int)threadInicial; j < threadFinal; j++) {
-                    
-                    matrizC[i/(matrizB[0].length)][j % matrizB[0].length] = 0.0;
                     // Faz a multiplicação de matrizes preenchendo a matriz C
-                    for (int k = 0; k < matrizC.length; k++) {
-                        matrizC[i/(matrizB[0].length)][j % matrizB[0].length] = 
-                            matrizC[i/(matrizB[0].length)][j % matrizB[0].length] + matrizA[i/(matrizB[0].length)][k] * matrizB[k][j % matrizB[0].length];
+                    for (int k = 0; k < matrizC[0].length; k++) {
+                        matrizC[i][j] = matrizC[i][j] + matrizA[i][k] * matrizB[k][j];
                     }
                 }
             }
-
             return matrizC;
-
-            
         } catch (Exception e) {
             e.printStackTrace();
             return null;
