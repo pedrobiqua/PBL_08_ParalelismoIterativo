@@ -1,35 +1,37 @@
 public class MutiplicacaoMatriz {
 
     private long threadInicial;
+    private long threadFim;
     private double[][] matrizA;
     private double[][] matrizB;
     private double[][] matrizC;
 
-    public MutiplicacaoMatriz(long threadInicial, double[][] matrizA, double[][] matrizB) {
+    public MutiplicacaoMatriz(long threadInicial, long threadFim, double[][] matrizA, double[][] matrizB, double[][] matrizC) {
         this.threadInicial = threadInicial;
+        this.threadFim = threadFim;
         this.matrizA = matrizA;
         this.matrizB = matrizB;
-        this.matrizC = new double[matrizA.length][matrizB[0].length];
+        this.matrizC = matrizC;
     }
 
-    public double[][] execute() {
+    public void execute() {
 
         try {
             // Linha
-            for (int i = ( (int)threadInicial/matrizC.length ); i < matrizC.length; i++) {
+            for (int h = (int)threadInicial; h <= (int)threadFim; h++) {
                 // Coluna
-                for (int j = ((int)threadInicial % matrizC[0].length ); j < matrizC[0].length; j++) {
-
-                    // Faz a multiplicação de matrizes preenchendo a matriz C
-                    for (int k = 0; k < matrizC[0].length; k++) {
+                int i = h / matrizC[0].length;
+                int j = h % matrizC[0].length;
+                // Faz a multiplicação de matrizes preenchendo a matriz C
+                if (matrizC[i][j] == 0) {
+                    for (int k = 0; k < matrizA[0].length; k++) {
                         matrizC[i][j] = matrizC[i][j] + matrizA[i][k] * matrizB[k][j];
                     }
                 }
             }
-            return matrizC;
+            
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
     }
 }

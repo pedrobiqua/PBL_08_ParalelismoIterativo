@@ -4,40 +4,33 @@ public class GerenciadorDeMutiplicacoes extends Thread {
     
     private int id;
     private long threadInicial;
+    private long threadFim;
     private double[][] matrizA;
     private double[][] matrizB;
+    private double[][] matrizC;
     private Semaphore conclusao;
 
-    public GerenciadorDeMutiplicacoes(int id, long threadInicial, Semaphore conclusao, double[][] matrizA, double[][] matrizB) {
+    public GerenciadorDeMutiplicacoes(int id, long threadInicial, long threadFim, Semaphore conclusao, double[][] matrizA, double[][] matrizB, double[][] matrizC) {
         this.id = id;
         this.threadInicial = threadInicial;
+        this.threadFim = threadFim;
         this.conclusao = conclusao;
         this.matrizA = matrizA;
         this.matrizB = matrizB;
+        this.matrizC = matrizC;
     }
 
     public void run() {
         try {
 
             System.out.println("Thread [" + id + "] iniciada");
-            MutiplicacaoMatriz multiplicacao = new MutiplicacaoMatriz(threadInicial, matrizA, matrizB);
-            double[][] matrizC = multiplicacao.execute();
-            SalvaMatriz(matrizC);
+            MutiplicacaoMatriz multiplicacao = new MutiplicacaoMatriz(threadInicial, threadFim, matrizA, matrizB, matrizC);
+            multiplicacao.execute();
             System.out.println("Thread [" + id + "] finalizada");
             conclusao.release();
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public void SalvaMatriz(double[][] matriz) {
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                if (matriz[i][j] != 0) {
-                    App.MatrizResultante[i][j] = matriz[i][j];
-                }
-            }
         }
     }
 }
