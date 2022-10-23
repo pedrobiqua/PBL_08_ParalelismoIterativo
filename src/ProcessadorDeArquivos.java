@@ -16,6 +16,8 @@ public class ProcessadorDeArquivos {
      * @param nomeArquivo Nome do arquivo que contem a matriz.
      * @return Matriz criada apartir do arquivo.
      * @throws IOException Caso o arquivo nao exista.
+     * @author Pedro Bianchini de Quadros
+     * @author Lucas Kreutzer de Jesus
      */
     public static double[][] inicializaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
 
@@ -51,6 +53,8 @@ public class ProcessadorDeArquivos {
      * @param nomeArquivo Nome do arquivo.
      * @return Matriz de acordo com as colunas e linhas do arquivo.
      * @throws IOException Exceção de entrada e saída.
+     * @author Pedro Bianchini de Quadros
+     * @author Lucas Kreutzer de Jesus
      */
     private static double[][] criaMatrizApartirDoArquivo(String nomeArquivo) throws IOException {
 
@@ -83,6 +87,8 @@ public class ProcessadorDeArquivos {
      * @param tamanhoLinha
      * @param tamanhoColuna
      * @param nomeArquivo
+     * @author Pedro Bianchini de Quadros
+     * @author Lucas Kreutzer de Jesus
      */
     public static void criaAqruivoMatriz(int tamanhoLinha, int tamanhoColuna, String nomeArquivo) {
 
@@ -106,6 +112,8 @@ public class ProcessadorDeArquivos {
      * Salva a matriz em um arquivo.
      * @param matriz  Matriz a ser salva.
      * @param nomeArquivo Nome do arquivo.
+     * @author Pedro Bianchini de Quadros
+     * @author Lucas Kreutzer de Jesus
      */
     public static void SalvaMatriz(double[][] matriz, String nomeArquivo) {
 

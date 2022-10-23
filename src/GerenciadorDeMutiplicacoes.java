@@ -10,6 +10,20 @@ public class GerenciadorDeMutiplicacoes extends Thread {
     private double[][] matrizC;
     private Semaphore conclusao;
 
+    /**
+     * Construtor da classe
+     * @param id identificador da thread
+     * @param threadInicial Onde começa a multiplicação das matrizes
+     * @param threadFim Onde termina a multiplicação das matrizes
+     * @param conclusao Semaforo para controlar a conclusão das threads
+     * @param matrizA matriz A
+     * @param matrizB matriz B
+     * @param matrizC matriz C
+     * @author Pedro Bianchini de Quadros
+     * @author Lukas Jacon Barboza
+     * @author Thiago Krugel
+     * @author Lucas Kreutzer de Jesus
+     */
     public GerenciadorDeMutiplicacoes(int id, long threadInicial, long threadFim, Semaphore conclusao, double[][] matrizA, double[][] matrizB, double[][] matrizC) {
         this.id = id;
         this.threadInicial = threadInicial;
@@ -20,6 +34,13 @@ public class GerenciadorDeMutiplicacoes extends Thread {
         this.matrizC = matrizC;
     }
 
+    /**
+     * Executa a multiplicação de matrizes e preenche uma matriz C.
+     * @author Pedro Bianchini de Quadros
+     * @author Lukas Jacon Barboza
+     * @author Thiago Krugel
+     * @author Lucas Kreutzer de Jesus
+     */
     public void run() {
         try {
 

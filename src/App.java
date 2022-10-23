@@ -2,10 +2,12 @@ import java.util.concurrent.Semaphore;
 
 public class App {
 
-    public static double[][] MatrizResultante;
-
     /**
      * @param args the command line arguments
+     * @author Pedro Bianchini de Quadros
+     * @author Lukas Jacon Barboza
+     * @author Thiago Krugel
+     * @author Lucas Kreutzer de Jesus
      */
     public static long execute_MutiplicacaoMatriz_Sequencial(long threadInicial, long threadFim, double[][] matrizA, double[][] matrizB, double[][] matrizC) {
         MutiplicacaoMatriz mutiplicacaoMatriz = new MutiplicacaoMatriz(threadInicial, (threadFim - 1), matrizA, matrizB, matrizC);
@@ -19,6 +21,10 @@ public class App {
 
     /**
      * @param args the command line arguments
+     * @author Pedro Bianchini de Quadros
+     * @author Lukas Jacon Barboza
+     * @author Thiago Krugel
+     * @author Lucas Kreutzer de Jesus
      */
     public static long execute_MutiplicacaoMatriz_Paralela(long totalDeVetoresMatrizC, int numeroDeTarefas, double[][] matrizA, double[][] matrizB, double[][] matrizC) throws InterruptedException {
         
@@ -69,12 +75,9 @@ public class App {
 		System.out.println("Número de tarefas: " + numTarefas);
 		System.out.println("Tarefas por processador: " + tarefasPorProcessador);
 
-        String SEP = ", ";
-		System.out.println("N" + SEP + "Tamanho da Sequência" + SEP + "Tempo Sequencial" + SEP + "Tempo Paralelo" + SEP + "Razão entre os Tempos");
-
         for (int n = 0; n < 1; n++) {
-            ProcessadorDeArquivos.criaAqruivoMatriz(3, 3, "MatrizA.txt");
-            ProcessadorDeArquivos.criaAqruivoMatriz(3, 3, "MatrizB.txt");
+            ProcessadorDeArquivos.criaAqruivoMatriz(1000, 1000, "MatrizA.txt");
+            ProcessadorDeArquivos.criaAqruivoMatriz(1000, 1000, "MatrizB.txt");
 
             double[][] matrizA = ProcessadorDeArquivos.inicializaMatrizApartirDoArquivo("MatrizA.txt");
             double[][] matrizB = ProcessadorDeArquivos.inicializaMatrizApartirDoArquivo("MatrizB.txt");
@@ -89,9 +92,9 @@ public class App {
 
             double razao = (double) tempoSequencial / tempoParalelo;
 
-            System.out.println(n + SEP + (totalDeVetoresMatrizC/numTarefas) + SEP + tempoSequencial + SEP + tempoParalelo + SEP + razao);
+            System.out.println("Tempo paralelo: " + tempoParalelo);
+            System.out.println("Tempo sequencial: " + tempoSequencial);
+            System.out.println("Razao: " + razao);
         }
-
-        System.out.println("Fim do programa");
     }
 }
