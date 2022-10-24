@@ -68,7 +68,7 @@ public class App {
         System.out.println("PBL_08");
 
         final int tarefasPorProcessador = 1;
-		final int totalProcessadores = Runtime.getRuntime().availableProcessors();
+		final int totalProcessadores = 8;
 		final int numTarefas = (tarefasPorProcessador) * totalProcessadores;
 
         System.out.println("Total de processadores: " + totalProcessadores);
